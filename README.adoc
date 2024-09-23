@@ -1,0 +1,174 @@
+[[custom-job-icon-plugin]]
+= image:src/main/webapp/icons/default.png[48,48] Custom Job Icon Plugin
+:toc: macro
+:toclevels: 3
+:toc-title:
+
+image:https://ci.jenkins.io/job/Plugins/job/custom-job-icon-plugin/job/main/badge/icon[link="https://ci.jenkins.io/job/Plugins/job/custom-job-icon-plugin/job/main/"]
+image:https://codecov.io/gh/jenkinsci/custom-job-icon-plugin/branch/main/graph/badge.svg[link="https://codecov.io/gh/jenkinsci/custom-job-icon-plugin"]
+image:https://github.com/jenkinsci/custom-job-icon-plugin/actions/workflows/jenkins-security-scan.yml/badge.svg[link="https://github.com/jenkinsci/custom-job-icon-plugin/actions/workflows/jenkins-security-scan.yml"]
+
+image:https://img.shields.io/jenkins/plugin/i/custom-job-icon.svg?color=blue&label=installations[link="https://stats.jenkins.io/pluginversions/custom-job-icon.html"]
+image:https://img.shields.io/github/contributors/jenkinsci/custom-job-icon-plugin.svg?color=blue[link="https://github.com/jenkinsci/custom-job-icon-plugin/graphs/contributors"]
+image:https://img.shields.io/github/release/jenkinsci/custom-job-icon-plugin.svg?label=changelog[link="https://github.com/jenkinsci/custom-job-icon-plugin/releases/latest"]
+
+== Introduction
+
+This plugin provides custom icons for jobs.
+You can upload your own images, use predefined icons emojis as icon.
+
+toc::[]
+
+== Changelog
+
+Release notes are recorded in https://github.com/jenkinsci/custom-job-icon-plugin/releases[GitHub Releases].
+
+== Configuration
+
+=== Job Configuration
+
+There are multiple types of custom icons provided by this plugin.
+
+image:docs/overview.png[]
+
+==== Custom Job Icon
+
+Use your custom icon for a job.
+
+image:docs/custom-job-icon.png[]
+
+Select the _Custom Job Icon_ option and use `Browse...` to choose a file.
+
+You can crop the image to the desired result and upload it using the `Apply` button.
+
+The file name will be randomized during upload.
+
+You can also select an image from the list of the already available icons.
+
+The file will be deleted automatically if the job it used is being deleted - unless of course the file is still used by another job.
+
+image:docs/custom-job-icon-configuration.png[]
+
+===== Job DSL
+
+Configuration via https://github.com/jenkinsci/job-dsl-plugin[job-dsl-plugin]:
+
+[source,groovy]
+----
+userContent('customJobIcons/custom.png', streamFileFromWorkspace('custom.png'))
+
+job('custom-icon') {
+    icon {
+        customJobIcon {
+            icon('custom.png')
+        }
+    }
+}
+----
+
+==== Emoji Job Icon
+
+Use https://unicode.org/emoji/charts/full-emoji-list.html[unicode emojis] as icon.
+
+image:docs/emoji-job-icon.png[]
+
+Select the _Emoji Job Icon_ option and select any of the available emojis.
+
+image:docs/emoji-job-icon-configuration.png[]
+
+===== Job DSL
+
+Configuration via https://github.com/jenkinsci/job-dsl-plugin[job-dsl-plugin]:
+
+[source,groovy]
+----
+job('emoji-icon') {
+    icon {
+        emojiJobIcon {
+            icon('sloth')
+        }
+    }
+}
+----
+
+==== FontAwesome Job Icon
+
+Use https://fontawesome.com[Font Awesome Icons] provided by https://github.com/jenkinsci/font-awesome-api-plugin[font-awesome-api-plugin] as icon.
+
+image:docs/fontawesome-job-icon.png[]
+
+Select the _FontAwesome Job Icon_ option and select any of the available icons.
+
+image:docs/fontawesome-job-icon-configuration.png[]
+
+===== Job DSL
+
+Configuration via https://github.com/jenkinsci/job-dsl-plugin[job-dsl-plugin]:
+
+[source,groovy]
+----
+job('fontawesome-icon') {
+    icon {
+        fontAwesomeJobIcon {
+            icon('brands/jenkins')
+        }
+    }
+}
+----
+
+==== Ionicon Job Icon
+
+Use https://ionic.io/ionicons[Ionicons] provided by https://github.com/jenkinsci/ionicons-api-plugin[ionicons-api-plugin] as icon.
+
+image:docs/ionicon-job-icon.png[]
+
+Select the _Ionicon Job Icon_ option and select any of the available icons.
+
+image:docs/ionicon-job-icon-configuration.png[]
+
+===== Job DSL
+
+Configuration via https://github.com/jenkinsci/job-dsl-plugin[job-dsl-plugin]:
+
+[source,groovy]
+----
+job('ionicon-icon') {
+    icon {
+        ioniconJobIcon {
+            icon('jenkins')
+        }
+    }
+}
+----
+
+==== OpenSource Job Icon
+
+Use icons provided by https://github.com/jenkinsci/oss-symbols-api-plugin[oss-symbols-api-plugin] as icon.
+
+image:docs/oss-job-icon.png[]
+
+Select the _OpenSource Job Icon_ option and select any of the available icons.
+
+image:docs/oss-job-icon-configuration.png[]
+
+===== Job DSL
+
+Configuration via https://github.com/jenkinsci/job-dsl-plugin[job-dsl-plugin]:
+
+[source,groovy]
+----
+job('opensource-icon') {
+    icon {
+        openSourceJobIcon {
+            icon('cdf-icon-color')
+        }
+    }
+}
+----
+
+=== Global Configuration
+
+Check for unused custom job icon files and delete them.
+This operation will delete all images that are currently not used by any job configuration.
+
+image:docs/global-configuration.png[]

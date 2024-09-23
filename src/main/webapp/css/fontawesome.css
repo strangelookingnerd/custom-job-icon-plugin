@@ -1,0 +1,9 @@
+.fontawesome-icon-name {
+    display: none;
+}
+
+.fontawesome-icon-selection {
+    color: unset;
+    cursor: pointer;
+    text-decoration: none !important;
+}

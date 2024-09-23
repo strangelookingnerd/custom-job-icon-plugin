@@ -1,0 +1,42 @@
+# This JCasC file is used to set up Jenkins for screenshots
+jobs:
+  - script: >
+      job('Job with Custom Icon') {
+        icon {
+          customJobIcon {
+            icon('')
+          }
+        }
+      }
+  - script: >
+      job('Job with Emoji Icon') {
+        icon {
+          emojiJobIcon {
+              icon('sloth')
+          }
+        }
+      }
+  - script: >
+      job('Job with FontAwesome Icon') {
+        icon {
+          fontAwesomeJobIcon {
+              icon('regular/hand-peace')
+          }
+        }
+      }
+  - script: >
+      job('Job with Ionicon Icon') {
+        icon {
+          ioniconJobIcon {
+              icon('jenkins')
+          }
+        }
+      }
+  - script: >
+      job('Job with OpenSource Icon') {
+        icon {
+          openSourceJobIcon {
+              icon('cdf-icon-color')
+          }
+        }
+      }

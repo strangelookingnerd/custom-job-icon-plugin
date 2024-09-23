@@ -1,0 +1,41 @@
+jobs:
+  - script: >
+      job('custom-icon') {
+        icon {
+          customJobIcon {
+            icon('')
+          }
+        }
+      }
+  - script: >
+      job('emoji-icon') {
+        icon {
+          emojiJobIcon {
+              icon('sloth')
+          }
+        }
+      }
+  - script: >
+      job('fontawesome-icon') {
+        icon {
+          fontAwesomeJobIcon {
+              icon('regular/hand-peace')
+          }
+        }
+      }
+  - script: >
+      job('ionicon-icon') {
+        icon {
+          ioniconJobIcon {
+              icon('jenkins')
+          }
+        }
+      }
+  - script: >
+      job('oss-icon') {
+        icon {
+          openSourceJobIcon {
+              icon('cdf-icon-color')
+          }
+        }
+      }

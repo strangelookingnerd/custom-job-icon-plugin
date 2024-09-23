@@ -1,0 +1,13 @@
+.custom-icon.jenkins-file-upload {
+    width: 90%;
+}
+
+.custom-icon-name {
+    display: none;
+}
+
+.custom-icon-selection {
+    cursor: pointer;
+    height: 24px;
+    width: 24px;
+}

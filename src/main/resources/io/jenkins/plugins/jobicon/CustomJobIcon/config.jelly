@@ -1,0 +1,37 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:f="/lib/form">
+    <link rel="stylesheet" href="${rootURL}/plugin/custom-job-icon/css/custom-icon.css" type="text/css" />
+    <script src="${rootURL}/plugin/custom-job-icon/js/custom-icon-config.js" type="text/javascript" />
+    <link rel="stylesheet" href="${rootURL}/plugin/custom-job-icon/css/croppie.css" type="text/css" />
+    <script src="${rootURL}/plugin/custom-job-icon/scripts/croppie.js" type="text/javascript" />
+    <j:invokeStatic var="customicons" method="getAvailableIcons"
+                    className="io.jenkins.plugins.jobicon.CustomJobIcon" />
+    <f:entry title="${%IconPreview}" help="${descriptor.getHelpFile('upload')}">
+        <div>
+            <div id="custom-icon-cropper"><!-- set in initCustomIcon() --></div>
+            <f:file id="custom-icon-upload" accept="image/*" onchange="setCustomIconFile(this.files[0])"
+                    clazz="custom-icon jenkins-file-upload" />
+            <st:nbsp />
+            <input type="button" value="${%Apply}"
+                   onclick="doUploadCustomIcon('${it.getUrl()}', '${%UploadSuccess}', '${%UploadFailed}')" />
+        </div>
+    </f:entry>
+    <j:if test="${not empty customicons}">
+        <f:advanced title="${%AvailableIcons}${not empty customicons ? ' (' + customicons.size() + ')' : ''}">
+            <j:forEach var="icon" items="${customicons}">
+                <a tooltip="${icon}">
+                    <img class="custom-icon-selection" src="${rootURL}/userContent/customJobIcons/${icon}"
+                         onclick="setCustomIcon(this.src)" />
+                </a>
+                <st:nbsp />
+            </j:forEach>
+        </f:advanced>
+    </j:if>
+    <f:entry field="jobicon">
+        <f:textbox id="custom-icon-name" value="${instance.icon}" clazz="custom-icon-name" />
+    </f:entry>
+    <script>
+        // init the preview
+        window.addEventListener("DOMContentLoaded", initCustomIcon());
+    </script>
+</j:jelly>

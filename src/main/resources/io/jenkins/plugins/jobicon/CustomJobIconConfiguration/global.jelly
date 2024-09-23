@@ -1,0 +1,27 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:l="/lib/layout" xmlns:st="jelly:stapler" xmlns:f="/lib/form">
+    <script src="${rootURL}/plugin/custom-job-icon/js/custom-icon-global.js" type="text/javascript" />
+    <j:invokeStatic var="customicons" method="getAvailableIcons"
+                    className="io.jenkins.plugins.jobicon.CustomJobIcon" />
+    <f:section title="${%CustomJobIcons}">
+        <f:entry>
+            ${%DiskUsage}
+            <st:nbsp />
+            ${instance.getDiskUsage()}
+        </f:entry>
+        <j:if test="${not empty customicons}">
+            <f:advanced title="${%AvailableIcons}${not empty customicons ? ' (' + customicons.size() + ')' : ''}">
+                <j:forEach var="icon" items="${customicons}">
+                    <l:icon src="${rootURL}/userContent/customJobIcons/${icon}" title="${icon}"
+                            tooltip="${icon}"
+                            class="icon-md" />
+                    <st:nbsp />
+                </j:forEach>
+            </f:advanced>
+            <f:entry help="${descriptor.getHelpFile('cleanup')}">
+                <input id="custom-icon-cleanup" type="button" value="${%CleanupIcons}"
+                       onclick="doCustomIconCleanup('${%CleanupSuccess}', '${%CleanupFailed}')" />
+            </f:entry>
+        </j:if>
+    </f:section>
+</j:jelly>
